@@ -108,10 +108,7 @@ public class Chrono {
       refreshCounters(); // in case we're not initialized at 0 seconds
 
       while (rolling) {
-        if(timeProvider.isStarted()) {
-          refreshCounters();
-        }
-
+        refreshCounters();
         refreshCurrentDateTime();
 
         frame.repaint();
