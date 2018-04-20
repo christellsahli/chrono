@@ -1,6 +1,7 @@
 package fr.wildcodeschool.quetes.chrono;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -8,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
+import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class Chrono {
 
@@ -95,22 +98,26 @@ public class Chrono {
     frame.setContentPane(mainPanel);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.pack();
-    frame.setVisible(true);
   }
 
-  public synchronized void roll() throws InterruptedException {
+  public synchronized void roll(boolean maximise) throws InterruptedException {
+
+
     if(!rolling) {
       rolling = true;
 
       hookKeyboard();
       display();
+      if (maximise) {
+          frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+      }
+      frame.setVisible(true);
 
       refreshCounters(); // in case we're not initialized at 0 seconds
 
       while (rolling) {
         refreshCounters();
         refreshCurrentDateTime();
-
         frame.repaint();
         Thread.sleep(1000L);
       }
