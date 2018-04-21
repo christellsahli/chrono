@@ -20,7 +20,7 @@ public class Startup {
             }
         }
 
-        TimeProvider tp = new DummyTimeProvider(totalRunTime);
+        TimeProvider tp = new JavaTimeProvider(totalRunTime);
         new Chrono(tp).roll(maximise);
     }
 }
