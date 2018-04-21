@@ -1,6 +1,7 @@
 package fr.wildcodeschool.quetes.chrono;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -83,7 +84,7 @@ public class Chrono {
     //TODO
   }
 
-  private void display() throws InterruptedException {
+  private void display(boolean maximise) throws InterruptedException {
     frame = new JFrame("Chrono") {
       @Override
       public void dispose() {
@@ -95,15 +96,18 @@ public class Chrono {
     frame.setContentPane(mainPanel);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.pack();
+    if (maximise) {
+        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+    }
     frame.setVisible(true);
   }
 
-  public synchronized void roll() throws InterruptedException {
+  public synchronized void roll(boolean maximise) throws InterruptedException {
     if(!rolling) {
       rolling = true;
 
       hookKeyboard();
-      display();
+      display(maximise);
 
       refreshCounters(); // in case we're not initialized at 0 seconds
 

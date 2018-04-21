@@ -9,6 +9,9 @@ public class DummyTimeProvider implements TimeProvider {
     private boolean started;
 
 
+    public DummyTimeProvider() {
+    }
+
     public DummyTimeProvider(long totalRunTime) {
 
         this.totalRunTime = totalRunTime * 1000;
@@ -20,8 +23,8 @@ public class DummyTimeProvider implements TimeProvider {
 
         if (isStarted()){
             // Arrête le chrono
-            started = false;
             totalRunTime += new Date().getTime() - startTime ;
+            started = false;
         }
         else{
             // lance le chrono
